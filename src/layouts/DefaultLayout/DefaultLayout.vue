@@ -6,6 +6,11 @@
 
 <script>
 export default {
-
+  name: "DefaultLayout",
+  created() {
+    document.body.classList.add("default_layout_body");
+  }
 }
 </script>
+
+<style src="./DefaultLayout.scss" lang="scss"/>
