@@ -13,9 +13,25 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
   cursor: url('~@/assets/images/cursors/Hand.cur'), pointer;
 }
 
+button:disabled, [type="button"]:disabled, [type="reset"]:disabled, [type="submit"]:disabled {
+  cursor: url('~@/assets/images/cursors/Hand.cur'), no-drop;
+}
+
 h1, h2, h3, h4, h5 {
   color: $keyColor;
 }
+
 p {
   color: $primaryColor;
+}
+
+label {
+  cursor: url('~@/assets/images/cursors/Handwriting.cur'), auto;
+}
+
+input, textarea, h1, h2, h3, h4, h5 {
+  cursor: url('~@/assets/images/cursors/IBeam.cur'), auto;
+  &[type='checkbox'], &[type='radio'] {
+    cursor: url('~@/assets/images/cursors/Arrow.cur'), auto;
+  }
 }

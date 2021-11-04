@@ -62,6 +62,9 @@
       background-color: $dangerColor;
       color: $background-color;
     }
+    &:disabled {
+      background-color: $background-color;
+    }
   }
 
   &.btn-success {
