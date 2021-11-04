@@ -5,8 +5,12 @@ body {
 
 button {
   :not(:disabled) {
-    cursor: url('~@/assets/images/cursors/Hand.cur'), pointer;
+    cursor: url('~@/assets/images/cursors/Hand.cur'), pointer !important;
   }
+}
+
+button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disabled), [type="submit"]:not(:disabled) {
+  cursor: url('~@/assets/images/cursors/Hand.cur'), pointer;
 }
 
 h1, h2, h3, h4, h5 {
