@@ -1,0 +1,55 @@
+@import "src/assets/sass/variables";
+$buttonColor: rgba(10, 120, 150, 1);
+$buttonSize: 50px;
+$buttonActiveSize: 160px;
+$buttonMargin: -8px;
+
+.scene_nav {
+  position: relative;
+
+  &_list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    transform: scaleY(0.5);
+  }
+
+  &_item {
+    display: block;
+
+    &:not(:first-child) {
+      margin-left: $buttonMargin;
+    }
+
+    &:nth-child(even) {
+      transform: scaleY(-1);
+    }
+  }
+
+  &_button {
+    display: block;
+    width: $buttonSize;
+    height: $buttonSize;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: $buttonColor;
+    outline: none;
+    transition: 500ms;
+    clip-path: polygon(
+      $buttonSize / 2 0,
+      calc(100% - #{$buttonSize / 2}) 0,
+      100% 100%,
+      0 100%
+    );
+
+    &.active {
+      width: $buttonActiveSize;
+      background: $keyColor;
+    }
+
+    &:hover {
+      background: $keyColor;
+    }
+  }
+}
