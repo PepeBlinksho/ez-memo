@@ -102,8 +102,12 @@
           <h1>A EZMEMO UI PROJECT</h1>
           <p>Think rich, look poor.</p>
           <p>When you come to a roadblock, take a detour.</p>
-          <p class="text-success">When it is dark enough, you can see the stars.</p>
-          <p class="text-danger">Victory is sweetest when you’ve known defeat.</p>
+          <p class="text-success">
+            When it is dark enough, you can see the stars.
+          </p>
+          <p class="text-danger">
+            Victory is sweetest when you’ve known defeat.
+          </p>
         </div>
       </div>
     </div>
