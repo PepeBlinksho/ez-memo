@@ -8,12 +8,12 @@
 <script>
 import Version from "../../components/Version/Version";
 export default {
-  components: { Version },
   name: "LaunchLayout",
+  components: {Version},
   created() {
     document.body.classList.add("launch_layout_body");
-  },
-};
+  }
+}
 </script>
 
-<style src="./LaunchLayout.scss" lang="scss" />
+<style src="./LaunchLayout.scss" lang="scss"/>

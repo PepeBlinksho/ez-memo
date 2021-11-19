@@ -14,8 +14,8 @@
 
 <script>
 export default {
-  name: "Footer",
-};
+  name: "Version"
+}
 </script>
 
-<style src="./Version.scss" lang="scss" scoped />
+<style src="./Version.scss" lang="scss" scoped/>

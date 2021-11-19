@@ -32,15 +32,15 @@ export default {
       cornerOpacity: 0
     }
   },
-  created() {
-    this.animation()
+  created () {
+    this.animation();
   },
   methods: {
     animation: function () {
       setTimeout(() => {
         this.lineOpacity = 1;
       }, 800)
-      setInterval(() => {
+      setTimeout(() => {
         this.cornerOpacity = 1;
       }, 1200)
     }

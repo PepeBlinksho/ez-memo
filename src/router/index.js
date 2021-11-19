@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Top from "@/pages/Top/Top";
 import LaunchLayout from "@/layouts/LaunchLayout/LaunchLayout";
 import DefaultLayout from "@/layouts/DefaultLayout/DefaultLayout";
-import Element from "@/pages/Elements.vue"
+import Elements from "../pages/Elements";
 
 const routes = [
   {
@@ -23,10 +23,10 @@ const routes = [
       {
         path: '',
         name: 'Elements',
-        component: Element,
+        component: Elements,
       }
     ]
-  },
+  }
 ]
 
 const router = createRouter({

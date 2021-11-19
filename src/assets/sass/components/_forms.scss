@@ -18,31 +18,22 @@ form {
   }
 
   .form-check-input {
-    &[type="checkbox"],
-    &[type="radio"] {
-      border-radius: 0;
-      border: 1px $keyColor solid;
-      color: $keyColor;
-      background-color: $background-color;
-      &[type="checkbox"]:checked {
-        border: 1px $keyColor solid;
-        color: $keyColor;
-        background-color: $background-color;
-      }
-    }
-
-    &[type="radio"] {
-      border: 1px $keyColor solid;
-      color: $keyColor;
-      background-color: $background-color;
-      &[type="checkbox"]:checked {
-        border: 1px $keyColor solid;
-        color: $keyColor;
-        background-color: $background-color;
-      }
-    }
-
     background-color: $background-color;
     border: 1px $keyColor solid;
+
+    &[type="checkbox"],  &[type="radio"] {
+      color: $keyColor;
+      border: 1px $keyColor solid;
+      background-color: $background-color;
+      &:checked {
+        color: $keyColor;
+        border: 1px $keyColor solid;
+        background-color: $background-color;
+      }
+    }
+
+    &[type="checkbox"] {
+      border-radius: 0;
+    }
   }
 }

@@ -63,6 +63,8 @@
       color: $background-color;
     }
     &:disabled {
+      border-color: $btn-danger-border-color;
+      color: $dangerColor;
       background-color: $background-color;
     }
   }
