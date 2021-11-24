@@ -53,6 +53,9 @@ $buttonMargin: -8px;
       display: inline-block;
       transform: scaleY(1.4);
       color: $mainColor;
+        & .icon {
+          margin-top: 8px;
+        }
     }
 
     &.o-active {

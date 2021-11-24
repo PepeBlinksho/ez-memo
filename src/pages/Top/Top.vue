@@ -1,17 +1,60 @@
 <template>
   <div class="top">
-      <div class="glow-bg">
-        <div class="glow"></div>
-      </div>
+    <div class="glow-bg">
+      <div class="glow"></div>
+    </div>
   </div>
-  <logo/>
+  <logo />
+  <font-awesome-icon icon="user-secret" />
   <scene-nav>
-    <scene-nav-link name="search">Search</scene-nav-link>
-    <scene-nav-link name="memos">Memos</scene-nav-link>
-    <scene-nav-link name="my_page">My Page</scene-nav-link>
-    <scene-nav-link name="login">Login</scene-nav-link>
-    <scene-nav-link name="register">Register</scene-nav-link>
-    <scene-nav-link name="settings">Settings</scene-nav-link>
+    <scene-nav-link name="search">
+      <template v-slot:text>
+        Search
+      </template>
+      <template v-slot:icon>
+        <icon icon="search" />
+      </template>
+    </scene-nav-link>
+    <scene-nav-link name="memos">
+      <template v-slot:text>
+        Memos
+      </template>
+      <template v-slot:icon>
+        <icon icon="memos" />
+      </template>
+    </scene-nav-link>
+    <scene-nav-link name="my_page">
+      <template v-slot:text>
+        My Page
+      </template>
+      <template v-slot:icon>
+        <icon icon="search" />
+      </template>
+    </scene-nav-link>
+    <scene-nav-link name="login">
+      <template v-slot:text>
+        Login
+      </template>
+      <template v-slot:icon>
+        <icon icon="search" />
+      </template>
+    </scene-nav-link>
+    <scene-nav-link name="register">
+      <template v-slot:text>
+        Register
+      </template>
+      <template v-slot:icon>
+        <icon icon="search" />
+      </template>
+    </scene-nav-link>
+    <scene-nav-link name="settings">
+      <template v-slot:text>
+        Settings
+      </template>
+      <template v-slot:icon>
+        <icon icon="cog" />
+      </template>
+    </scene-nav-link>
   </scene-nav>
 </template>
 
@@ -21,8 +64,8 @@ import SceneNav from "../../components/SceneNav/SceneNav";
 import SceneNavLink from "@/components/SceneNav/SceneNavLink";
 export default {
   name: "Top",
-  components: {SceneNavLink, SceneNav, Logo}
-}
+  components: { SceneNavLink, SceneNav, Logo },
+};
 </script>
 
-<style src="./Top.scss" lang="scss" scoped/>
+<style src="./Top.scss" lang="scss" scoped />
