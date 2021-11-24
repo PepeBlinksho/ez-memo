@@ -1,18 +1,17 @@
 <template>
   <div class="top">
-    <div class="glow-bg">
-      <div class="glow"></div>
-    </div>
+      <div class="glow-bg">
+        <div class="glow"></div>
+      </div>
   </div>
-  <logo />
-  <font-awesome-icon icon="user-secret" />
+  <logo/>
   <scene-nav>
     <scene-nav-link name="search">
       <template v-slot:text>
         Search
       </template>
       <template v-slot:icon>
-        <icon icon="search" />
+        <icon icon="search"/>
       </template>
     </scene-nav-link>
     <scene-nav-link name="memos">
@@ -20,7 +19,7 @@
         Memos
       </template>
       <template v-slot:icon>
-        <icon icon="memos" />
+        <icon icon="book"/>
       </template>
     </scene-nav-link>
     <scene-nav-link name="my_page">
@@ -28,7 +27,7 @@
         My Page
       </template>
       <template v-slot:icon>
-        <icon icon="search" />
+        <icon icon="user"/>
       </template>
     </scene-nav-link>
     <scene-nav-link name="login">
@@ -36,15 +35,15 @@
         Login
       </template>
       <template v-slot:icon>
-        <icon icon="search" />
+        <icon icon="sign-in-alt"/>
       </template>
     </scene-nav-link>
     <scene-nav-link name="register">
       <template v-slot:text>
-        Register
+        New User
       </template>
       <template v-slot:icon>
-        <icon icon="search" />
+        <icon icon="user-plus"/>
       </template>
     </scene-nav-link>
     <scene-nav-link name="settings">
@@ -52,7 +51,7 @@
         Settings
       </template>
       <template v-slot:icon>
-        <icon icon="cog" />
+        <icon icon="cog"/>
       </template>
     </scene-nav-link>
   </scene-nav>
@@ -64,8 +63,8 @@ import SceneNav from "../../components/SceneNav/SceneNav";
 import SceneNavLink from "@/components/SceneNav/SceneNavLink";
 export default {
   name: "Top",
-  components: { SceneNavLink, SceneNav, Logo },
-};
+  components: {SceneNavLink, SceneNav, Logo}
+}
 </script>
 
-<style src="./Top.scss" lang="scss" scoped />
+<style src="./Top.scss" lang="scss" scoped/>

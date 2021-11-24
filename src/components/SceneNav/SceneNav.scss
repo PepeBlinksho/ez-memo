@@ -1,8 +1,8 @@
 @import "src/assets/sass/variables";
 $buttonColor: rgba(10, 120, 150, 1);
-$buttonSize: 50px;
+$buttonSize: 60px;
 $buttonActiveSize: 160px;
-$buttonMargin: -8px;
+$buttonMargin: -12px;
 
 .scene_nav {
   position: relative;
@@ -53,9 +53,9 @@ $buttonMargin: -8px;
       display: inline-block;
       transform: scaleY(1.4);
       color: $mainColor;
-        & .icon {
-          margin-top: 8px;
-        }
+      &.icon {
+        margin-top: 8px;
+      }
     }
 
     &.o-active {
