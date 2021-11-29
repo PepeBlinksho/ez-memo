@@ -1,6 +1,7 @@
 $logo-size: 3.6em;
 $logo-size-sm: 2.6em;
 .logo {
+  transition: 1000ms;
   h1 {
     font: $logo-size 'Press Start 2P', cursive;
     @include media-breakpoint-down(sm) {

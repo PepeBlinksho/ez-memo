@@ -18,7 +18,12 @@ export default {
     setTimeout(() => {
       this.scene = 'register'
     }, 1000)
-  }
+  },
+  watch: {
+    scene: function (newScene, oldScene) {
+      this.$emit('sceneChanged', newScene)
+    }
+  },
 }
 </script>
 

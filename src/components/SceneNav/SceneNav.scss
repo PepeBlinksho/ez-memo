@@ -6,6 +6,7 @@ $buttonMargin: -12px;
 
 .scene_nav {
   position: relative;
+  transition: 1000ms;
 
   &_list {
     display: flex;
@@ -54,7 +55,7 @@ $buttonMargin: -12px;
       transform: scaleY(1.4);
       color: $mainColor;
       &.icon {
-        margin-top: 8px;
+        margin-top: 16px;
       }
     }
 
