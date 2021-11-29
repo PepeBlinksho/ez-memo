@@ -35,3 +35,30 @@ input, textarea, h1, h2, h3, h4, h5, p {
     cursor: url('~@/assets/images/cursors/Arrow.cur'), auto;
   }
 }
+
+.glow-bg {
+  top: 0;
+  left: 0;
+  right: 0;
+  color: #26dafd;
+  bottom: 0;
+  display: block;
+  position: fixed;
+  overflow: hidden;
+  font-size: 21px;
+  box-sizing: border-box;
+  line-height: 1.5;
+
+  .glow {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    position: absolute;
+    background-repeat: repeat;
+    background-position: center top;
+    background-attachment: fixed;
+    background-image: url('~@/assets/images/glow.png');
+  }
+}

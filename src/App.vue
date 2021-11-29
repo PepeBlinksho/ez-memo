@@ -4,6 +4,16 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data() {
+    return {
+      token: null,
+    }
+  },
+  methods: {
+    isLogin() {
+      return(this.token !== null)
+    }
+  }
 }
 </script>

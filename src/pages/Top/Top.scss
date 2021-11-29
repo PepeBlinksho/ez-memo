@@ -1,31 +1,4 @@
 .top {
-  .glow-bg {
-    top: 0;
-    left: 0;
-    right: 0;
-    color: #26dafd;
-    bottom: 0;
-    display: block;
-    position: fixed;
-    overflow: hidden;
-    font-size: 21px;
-    box-sizing: border-box;
-    line-height: 1.5;
-
-    .glow {
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 2;
-      position: absolute;
-      background-repeat: repeat;
-      background-position: center top;
-      background-attachment: fixed;
-      background-image: url('~@/assets/images/glow.png');
-    }
-  }
-
   .logo_pos {
     position: absolute;
     padding: 32px;

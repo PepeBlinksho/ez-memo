@@ -1,0 +1,37 @@
+@import "src/assets/sass/variables";
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10000;
+  background: $mainColor;
+  background: $background;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 250ms ease-out;
+
+  &_title {
+    opacity: 0;
+    transition: all 400ms ease-in;
+  }
+
+  .progress {
+    width: 30vw;
+    height: 32px;
+    border-radius: 0;
+    background-color: $background-color;
+    border: 1px $keyColor solid;
+    padding: 4px;
+    z-index: 20000;
+
+    .progress-bar {
+      background-color: $keyColor;
+      color: $mainColor;
+      z-index: 20000;
+    }
+  }
+}
