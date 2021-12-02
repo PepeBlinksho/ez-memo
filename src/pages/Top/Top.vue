@@ -242,10 +242,10 @@
 </template>
 
 <script>
-import Logo from "../../components/Logo/Logo";
-import SceneNav from "../../components/SceneNav/SceneNav";
-import SceneNavLink from "@/components/SceneNav/SceneNavLink";
-import Loading from "@/components/Loading/Loading";
+import Logo from "../../components/Logo/Logo"
+import SceneNav from "../../components/SceneNav/SceneNav"
+import SceneNavLink from "@/components/SceneNav/SceneNavLink"
+import Loading from "@/components/Loading/Loading"
 import {Modal} from "bootstrap"
 export default {
   name: "Top",
@@ -286,7 +286,8 @@ export default {
           .then((response) => {
             this.$root.tokenType = response.data.token_type
             this.$root.token = response.data.access_token
-            let loginModal = Modal.getOrCreateInstance(document.querySelector('#login'));
+            this.$root.syncToken()
+            let loginModal = Modal.getOrCreateInstance(document.querySelector('#login'))
             loginModal.hide()
           })
           .catch((error) => {
@@ -298,7 +299,7 @@ export default {
     logout() {
       this.$root.tokenType = null
       this.$root.token = null
-      let logoutModal = Modal.getOrCreateInstance(document.querySelector('#logout'));
+      let logoutModal = Modal.getOrCreateInstance(document.querySelector('#logout'))
       logoutModal.hide()
     }
   }
