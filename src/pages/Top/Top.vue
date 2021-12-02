@@ -278,7 +278,7 @@ export default {
       axios.post(this.$root.routes.login, {
         grant_type: 'password',
         client_id: 2,
-        client_secret: 'KRWn0eMyachoOxmsa3WDC1y3mMNdwo0JkCjAAq7a',
+        client_secret: 'Q4GFeuMn7yLDGJRxg1ScbKjFkkYk1woAyCrxAqEt',
         username: this.username,
         password: this.password,
         scope: '',
