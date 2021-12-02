@@ -7,12 +7,13 @@ export default {
   name: 'App',
   data() {
     return {
-      token: null,
+      tokenType: null,
+      token: ''
     }
   },
   methods: {
     isLogin() {
-      return(this.token !== null)
+      return (this.token !== null)
     }
   }
 }

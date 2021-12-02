@@ -20,6 +20,7 @@
   }
 
   .progress {
+    position: relative;
     width: 30vw;
     height: 32px;
     border-radius: 0;
@@ -27,6 +28,40 @@
     border: 1px $keyColor solid;
     padding: 4px;
     z-index: 20000;
+
+    .corner {
+      width: 10px;
+      height: 10px;
+      z-index: 30000;
+      opacity: 1;
+      position: absolute;
+      transition: all 250ms ease-in;
+      border-style: solid;
+    }
+
+    .left_top {
+      left: -2px;
+      top: -2px;
+      border-width: 2px 0 0 2px;
+    }
+
+    .left_bottom {
+      left: -2px;
+      bottom: -2px;
+      border-width: 0 0 2px 2px;
+    }
+
+    .right_top {
+      right: -2px;
+      top: -2px;
+      border-width: 2px 2px 0 0;
+    }
+
+    .right_bottom {
+      right: -2px;
+      bottom: -2px;
+      border-width: 0 2px 2px 0;
+    }
 
     .progress-bar {
       background-color: $keyColor;

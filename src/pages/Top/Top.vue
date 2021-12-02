@@ -29,7 +29,7 @@
           <icon icon="book"/>
         </template>
       </scene-nav-link>
-      <scene-nav-link name="my_page">
+      <scene-nav-link name="my_page" v-if="this.$root.isLogin()">
         <template v-slot:text>
           My Page
         </template>
@@ -37,12 +37,21 @@
           <icon icon="user"/>
         </template>
       </scene-nav-link>
-      <scene-nav-link name="login" data-bs-toggle="modal" data-bs-target="#login">
+      <scene-nav-link name="test1" v-if="!this.$root.isLogin()"></scene-nav-link>
+      <scene-nav-link name="login" data-bs-toggle="modal" data-bs-target="#login" v-if="!this.$root.isLogin()">
         <template v-slot:text>
           Login
         </template>
         <template v-slot:icon>
           <icon icon="sign-in-alt"/>
+        </template>
+      </scene-nav-link>
+      <scene-nav-link name="logout" data-bs-toggle="modal" data-bs-target="#logout" v-if="this.$root.isLogin()">
+        <template v-slot:text>
+          Logout
+        </template>
+        <template v-slot:icon>
+          <icon icon="sign-out-alt"/>
         </template>
       </scene-nav-link>
       <scene-nav-link name="register" data-bs-toggle="modal" data-bs-target="#newUserModal">
@@ -53,7 +62,7 @@
           <icon icon="user-plus"/>
         </template>
       </scene-nav-link>
-      <scene-nav-link name="settings" data-bs-toggle="modal" data-bs-target="#settingsModal">
+      <scene-nav-link name="settings" data-bs-toggle="modal" data-bs-target="#settingsModal" v-if="this.$root.isLogin()">
         <template v-slot:text>
           Settings
         </template>
@@ -61,6 +70,7 @@
           <icon icon="cog"/>
         </template>
       </scene-nav-link>
+      <scene-nav-link name="test2" v-if="!this.$root.isLogin()"></scene-nav-link>
     </scene-nav>
 
     <!-- New User Modal -->
@@ -160,22 +170,28 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="loginModalLabel">Create User</h5>
+            <h5 class="modal-title" id="loginModalLabel">Login</h5>
           </div>
           <div class="modal-body">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" v-if="hasErrors">
+              Incorrect username or password.
+              <button type="button" class="btn-close d-flex" data-bs-dismiss="alert" aria-label="Close">
+                <icon icon="times"/>
+              </button>
+            </div>
             <div class="form">
               <div class="mb-3">
                 <label for="login-email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="login-email">
+                <input type="email" class="form-control" id="login-email" v-model="username">
               </div>
               <div class="mb-3">
                 <label for="login-password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="login-password">
+                <input type="password" class="form-control" id="login-password" v-model="password">
               </div>
             </div>
           </div>
           <div class="modal-footer justify-content-center">
-            <button type="button" class="btn btn-primary">
+            <button type="button" class="btn btn-primary" @click="login()">
               <div class="corner left_top"></div>
               <div class="corner left_bottom"></div>
               <div class="corner right_top"></div>
@@ -193,6 +209,35 @@
         </div>
       </div>
     </div>
+    <!-- Logout Modal -->
+    <div class="modal fade" id="logout" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="logoutModalLabel">Logout</h5>
+          </div>
+          <div class="modal-body">
+            <p class="m-0">Are you sure you want to log out and exit?</p>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button type="button" class="btn btn-primary" @click="logout()">
+              <div class="corner left_top"></div>
+              <div class="corner left_bottom"></div>
+              <div class="corner right_top"></div>
+              <div class="corner right_bottom"></div>
+              Yes
+            </button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              <div class="corner left_top"></div>
+              <div class="corner left_bottom"></div>
+              <div class="corner right_top"></div>
+              <div class="corner right_bottom"></div>
+              No
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -201,28 +246,60 @@ import Logo from "../../components/Logo/Logo";
 import SceneNav from "../../components/SceneNav/SceneNav";
 import SceneNavLink from "@/components/SceneNav/SceneNavLink";
 import Loading from "@/components/Loading/Loading";
+import {Modal} from "bootstrap"
 export default {
   name: "Top",
   components: {Loading, SceneNavLink, SceneNav, Logo},
   data() {
     return {
-      positionChange: false
+      positionChange: false,
+      username: null,
+      password: null,
+      hasErrors: false,
+      loginModal: null,
+      logoutModal: null
     }
   },
   created() {
     setTimeout(() => {
       this.$refs.loading.hide()
     }, 1500)
-
-    window.console.log(this.$root.token)
   },
   methods: {
-    sceneChanged (newScene) {
+    sceneChanged(newScene) {
       if (newScene === 'search' || newScene === 'memos') {
         this.positionChange = true
       } else {
         this.positionChange = false
       }
+    },
+    login() {
+      this.$refs.loading.show()
+      axios.post(this.$root.routes.login, {
+        grant_type: 'password',
+        client_id: 2,
+        client_secret: 'KRWn0eMyachoOxmsa3WDC1y3mMNdwo0JkCjAAq7a',
+        username: this.username,
+        password: this.password,
+        scope: '',
+      })
+          .then((response) => {
+            this.$root.tokenType = response.data.token_type
+            this.$root.token = response.data.access_token
+            let loginModal = Modal.getOrCreateInstance(document.querySelector('#login'));
+            loginModal.hide()
+          })
+          .catch((error) => {
+            this.hasErrors = true
+          }).finally(() => {
+            this.$refs.loading.hide()
+          })
+    },
+    logout() {
+      this.$root.tokenType = null
+      this.$root.token = null
+      let logoutModal = Modal.getOrCreateInstance(document.querySelector('#logout'));
+      logoutModal.hide()
     }
   }
 }

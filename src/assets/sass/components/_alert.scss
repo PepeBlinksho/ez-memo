@@ -1,0 +1,14 @@
+.alert {
+  border-radius: 0;
+  background-color: $background-color;
+  .btn-close {
+    background: none;
+  }
+  &.alert-danger {
+    border-color: $btn-danger-border-color;
+    color: $dangerColor;
+    .btn-close {
+      color: $dangerColor;
+    }
+  }
+}

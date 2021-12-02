@@ -6,6 +6,10 @@
     <div class="loading_mask">
       <p class="loading_title" :style="{'opacity': opacity}">Loading...</p>
       <div class="progress">
+        <div class="corner left_top"></div>
+        <div class="corner left_bottom"></div>
+        <div class="corner right_top"></div>
+        <div class="corner right_bottom"></div>
         <div class="progress-bar" role="progressbar" :style="{'width': progress + '%'}">{{ progress }}%</div>
       </div>
     </div>
@@ -33,9 +37,16 @@ export default {
   },
   methods: {
     hide() {
-      this.isShow = false;
+      this.isShow = false
       setTimeout(() => {
         this.isHide = true;
+      }, 300)
+    },
+    show() {
+      this.progress = 0
+      this.isHide = false
+      setTimeout(() => {
+        this.isShow = true
       }, 300)
     }
   }
