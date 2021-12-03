@@ -1,0 +1,9 @@
+.card {
+    border-radius: 0;
+    background-color: $background-color;
+    border-color: $keyColor;
+
+    &-footer {
+        border-color: $btn-border-color;
+    }
+}

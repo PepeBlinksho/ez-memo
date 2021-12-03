@@ -11,7 +11,13 @@ export default {
   data() {
     return {
       tokenType: null,
-      token: null
+      token: null,
+      memos: [],
+      pageLinks: {
+        first: null,
+        last: null,
+        prev: null,
+      }
     }
   },
   methods: {
