@@ -2,7 +2,7 @@
   <div class="logo">
     <h1>
       <span>EZ</span>
-      <button class="memo">
+      <button class="memo" data-bs-toggle="modal" data-bs-target="#createMemo">
         <div class="memo_left line" :style="{'opacity': lineOpacity}"></div>
         <div class="memo_top line" :style="{'opacity': lineOpacity}"></div>
         <div class="memo_right line" :style="{'opacity': lineOpacity}"></div>

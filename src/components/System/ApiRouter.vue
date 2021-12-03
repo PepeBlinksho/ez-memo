@@ -1,5 +1,5 @@
 <script>
-const host = "http://0.0.0.0:80"
+const host = "http://ez-memo.test"
 const base = "/api"
 export default {
   name: "ApiRouter",
