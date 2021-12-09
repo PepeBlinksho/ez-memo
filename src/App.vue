@@ -17,6 +17,7 @@ export default {
         first: null,
         last: null,
         prev: null,
+        next: null
       }
     }
   },

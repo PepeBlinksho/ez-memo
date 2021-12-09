@@ -1,4 +1,8 @@
 .badge {
-    border-radius: 0;
+  border-radius: 0;
+  background-color: $background-color;
+  &.bg-success {
+    border-color: $btn-success-border-color;
     color: $successColor;
+  }
 }

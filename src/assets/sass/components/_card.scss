@@ -1,9 +1,12 @@
 .card {
-    border-radius: 0;
-    background-color: $background-color;
-    border-color: $keyColor;
+  border-radius: 0;
+  background-color: $background-color;
+  border-color: $keyColor;
 
-    &-footer {
-        border-color: $btn-border-color;
+  &-footer {
+    border-color: $btn-border-color;
+    &.text-muted {
+      color: $secondaryColor !important;
     }
+  }
 }
