@@ -24,7 +24,8 @@ export default {
         },
         viewMemo: host + base + '/v1/memos',
         listMemo: host + base + '/v1/memos/list',
-        listUserMemo: host + base + '/v1/user/memos/list'
+        listUserMemo: host + base + '/v1/user/memos/list',
+        folders: host + base + '/v1/user/folders'
       }
     }
   }

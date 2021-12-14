@@ -12,6 +12,8 @@ export default {
     return {
       tokenType: null,
       token: null,
+      keyword: '',
+      activeFolder: null,
       memos: [],
       pageLinks: {
         first: null,
@@ -34,6 +36,43 @@ export default {
           null : window.localStorage.getItem("token")
       this.tokenType = window.localStorage.getItem("tokenType") === 'null' ?
           null : window.localStorage.getItem("tokenType")
+    },
+    search() {
+      if (this.isLogin()) {
+        axios.get(this.routes.listUserMemo, {
+          params: {
+            keyword: this.keyword,
+            folder_id: this.activeFolder
+          },
+          headers: {
+            'Authorization': this.tokenType + ' ' + this.token
+          }
+        })
+            .then((response) => {
+              this.memos = response.data.data
+              this.pageLinks = response.data.links
+            })
+            .catch((error) => {
+              window.console.log(error)
+            }).finally(() => {
+
+        })
+      } else {
+        axios.get(this.routes.listMemo, {
+          params: {
+            keyword: this.keyword
+          }
+        })
+            .then((response) => {
+              this.memos = response.data.data
+              this.pageLinks = response.data.links
+            })
+            .catch((error) => {
+              window.console.log(error)
+            }).finally(() => {
+
+        })
+      }
     }
   }
 }

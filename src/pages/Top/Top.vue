@@ -8,11 +8,18 @@
     <div class="search form" :style="{'opacity': positionChange ? 1 : 0}">
       <div class="row">
         <div class="col-12">
-          <input type="text" placeholder="Enter keyword to search" class="form-control">
+          <input type="text"
+                 placeholder="Enter keyword to search"
+                 class="form-control"
+                 v-model="this.$root.keyword"
+                 @change="search()"
+                 @keyup.enter="search()"
+                 @input="search()"
+          >
         </div>
       </div>
     </div>
-    <scene-nav :class="{'nav_pos': positionChange}" v-on:scene-changed="sceneChanged($event)">
+    <scene-nav ref="sceneNav" :class="{'nav_pos': positionChange}" v-on:scene-changed="sceneChanged($event)">
       <scene-nav-link name="search">
         <template v-slot:text>
           Search
@@ -29,7 +36,14 @@
           <icon icon="book"/>
         </template>
       </scene-nav-link>
-      <scene-nav-link name="test3" v-if="this.$root.isLogin()"></scene-nav-link>
+      <scene-nav-link name="folders" v-if="this.$root.isLogin()" @click="loadFolders()">
+        <template v-slot:text>
+          Folders
+        </template>
+        <template v-slot:icon>
+          <icon icon="folder"/>
+        </template>
+      </scene-nav-link>
       <scene-nav-link name="my_page" v-if="this.$root.isLogin()">
         <template v-slot:text>
           My Page
@@ -75,31 +89,70 @@
     </scene-nav>
     <transition name="fade">
       <div class="contents" v-if="positionChange">
-      <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col" v-for="memo in this.$root.memos" :key="memo.id">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">
-                {{ memo.attributes.title }}
-                <span class="badge bg-success" v-if="memo.attributes.is_public">Public</span>
-              </h5>
-              <p class="card-text">{{ memo.attributes.contents }}</p>
-              <a href="#" class="btn btn-primary">
-                <div class="corner left_top"></div>
-                <div class="corner left_bottom"></div>
-                <div class="corner right_top"></div>
-                <div class="corner right_bottom"></div>
-                Detail
-              </a>
+        <div class="row row-cols-1 row-cols-md-3 g-4" v-if="activeScene !== 'folders'">
+          <div class="col" v-for="memo in this.$root.memos" :key="memo.id">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">
+                  {{ memo.attributes.title }}
+                  <span class="badge bg-success" v-if="memo.attributes.is_public">Public</span>
+                </h5>
+                <p class="card-text">{{ memo.attributes.contents }}</p>
+                <a href="#" class="btn btn-primary">
+                  <div class="corner left_top"></div>
+                  <div class="corner left_bottom"></div>
+                  <div class="corner right_top"></div>
+                  <div class="corner right_bottom"></div>
+                  Detail
+                </a>
+              </div>
+              <div class="card-footer text-muted d-flex justify-content-between">
+                <span>Created by {{ memo.attributes.user_id ? 'aaa' : 'None' }}</span>
+                <span>{{ memo.attributes.created_at_humans }}</span>
+              </div>
             </div>
-            <div class="card-footer text-muted d-flex justify-content-between">
-              <span>Created by {{ memo.attributes.user_id ? 'aaa' : 'None' }}</span>
-              <span>{{ memo.attributes.created_at_humans }}</span>
+          </div>
+        </div>
+        <div class="row" v-else>
+          <div class="col-3">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-action"
+                  :class="{'active': this.$root.activeFolder === folder.id}"
+                  v-for="folder in folders"
+                  :key="folder.id"
+                  @click="changeFolder(folder.id)">
+                {{ folder.name }}
+              </li>
+            </ul>
+          </div>
+          <div class="col-9 p-4">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+              <div class="col" v-for="memo in this.$root.memos" :key="memo.id">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      {{ memo.attributes.title }}
+                      <span class="badge bg-success" v-if="memo.attributes.is_public">Public</span>
+                    </h5>
+                    <p class="card-text">{{ memo.attributes.contents }}</p>
+                    <a href="#" class="btn btn-primary">
+                      <div class="corner left_top"></div>
+                      <div class="corner left_bottom"></div>
+                      <div class="corner right_top"></div>
+                      <div class="corner right_bottom"></div>
+                      Detail
+                    </a>
+                  </div>
+                  <div class="card-footer text-muted d-flex justify-content-between">
+                    <span>Created by {{ memo.attributes.user_id ? 'aaa' : 'None' }}</span>
+                    <span>{{ memo.attributes.created_at_humans }}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </transition>
 
     <!-- New User Modal -->
@@ -280,16 +333,16 @@
             <div class="form">
               <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title">
+                <input type="text" class="form-control" id="title" v-model="memoTitle">
               </div>
               <div class="mb-3">
                 <label for="contents" class="form-label">Contents</label>
-                <textarea class="form-control" id="contents" rows="3"></textarea>
+                <textarea class="form-control" id="contents" rows="3" v-model="memoContents"></textarea>
               </div>
             </div>
           </div>
           <div class="modal-footer justify-content-center">
-            <button type="button" class="btn btn-primary" @click="createUser()">
+            <button type="button" class="btn btn-primary" @click="createMemo()">
               <div class="corner left_top"></div>
               <div class="corner left_bottom"></div>
               <div class="corner right_top"></div>
@@ -322,6 +375,7 @@ export default {
   data() {
     return {
       positionChange: false,
+      activeScene: "register",
       username: null,
       password: null,
       hasErrors: false,
@@ -331,7 +385,10 @@ export default {
       email: null,
       newPassword: null,
       newRePassword: null,
-      createUserErrors: {}
+      createUserErrors: {},
+      memoTitle: null,
+      memoContents: null,
+      folders: []
     }
   },
   created() {
@@ -341,40 +398,44 @@ export default {
   },
   methods: {
     sceneChanged(newScene) {
-      if (newScene === 'search' || newScene === 'memos') {
+      this.activeScene = newScene
+
+      if (newScene === 'memos') {
+        this.$root.keyword = null
+        this.$root.search();
+      }
+
+      if (newScene === 'search' || newScene === 'memos' || newScene === 'folders') {
         this.positionChange = true
       } else {
         this.positionChange = false
       }
     },
     loadData() {
-      if (this.$root.isLogin()) {
-        axios.get(this.$root.routes.listUserMemo, {
-          headers: {
-            'Authorization': this.$root.tokenType + ' ' + this.$root.token
-          }
-        })
-            .then((response) => {
-              this.$root.memos = response.data.data
-              this.$root.pageLinks = response.data.links
-            })
-            .catch((error) => {
-              window.console.log(error)
-            }).finally(() => {
+      this.$root.search();
+    },
+    loadFolders() {
+      axios.get(this.routes.folders, {
+        headers: {
+          'Authorization': this.$root.tokenType + ' ' + this.$root.token
+        }
+      })
+          .then((response) => {
+            this.folders = response.data
+          })
+          .catch((error) => {
+            window.console.log(error)
+          }).finally(() => {
 
-        })
-      } else {
-        axios.get(this.$root.routes.listMemo)
-            .then((response) => {
-              this.$root.memos = response.data.data
-              this.$root.pageLinks = response.data.links
-            })
-            .catch((error) => {
-              window.console.log(error)
-            }).finally(() => {
-
-        })
-      }
+      })
+    },
+    search() {
+      this.$refs.sceneNav.changeScene('search')
+      this.$root.search();
+    },
+    changeFolder(id) {
+      this.$root.activeFolder = id
+      this.$root.search()
     },
     createUser() {
       this.$refs.loading.show()
@@ -410,7 +471,7 @@ export default {
       axios.post(this.$root.routes.login, {
         grant_type: 'password',
         client_id: 2,
-        client_secret: 'KRWn0eMyachoOxmsa3WDC1y3mMNdwo0JkCjAAq7a',
+        client_secret: 'Q4GFeuMn7yLDGJRxg1ScbKjFkkYk1woAyCrxAqEt',
         username: this.username,
         password: this.password,
         scope: '',
@@ -436,6 +497,43 @@ export default {
       let logoutModal = Modal.getOrCreateInstance(document.querySelector('#logout'))
       logoutModal.hide()
       window.location.read
+    },
+    createMemo() {
+      if (this.$root.isLogin()) {
+        axios.post(this.$root.routes.createUserMemo, {
+          title: this.memoTitle,
+          contents: this.memoContents
+        }, {
+          headers: {
+            'Authorization': this.$root.tokenType + ' ' + this.$root.token
+          }
+        })
+            .then((response) => {
+              this.$root.search()
+              let createMemoModal = Modal.getOrCreateInstance(document.querySelector('#createMemo'))
+              createMemoModal.hide()
+              this.memoTitle = null
+              this.memoContents = null
+            })
+            .catch((error) => {
+
+            })
+      } else {
+        axios.post(this.$root.routes.createMemo, {
+          title: this.memoTitle,
+          contents: this.memoContents
+        })
+            .then((response) => {
+              this.$root.search()
+              let createMemoModal = Modal.getOrCreateInstance(document.querySelector('#createMemo'))
+              createMemoModal.hide()
+              this.memoTitle = null
+              this.memoContents = null
+            })
+            .catch((error) => {
+
+            })
+      }
     }
   }
 }

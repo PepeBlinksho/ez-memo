@@ -1,0 +1,20 @@
+.list-group {
+  border: 2px $btn-border-color solid;
+  border-radius: 0;
+  &-item {
+    background-color: $background-color;
+    color: $keyColor;
+    border-color: $btn-border-color;
+    &-action {
+      &:hover {
+        background-color: $keyColor;
+        color: $background-color;
+      }
+    }
+    &.active {
+      background-color: $keyColor;
+      color: $background-color;
+      border-color: $btn-border-color;
+    }
+  }
+}

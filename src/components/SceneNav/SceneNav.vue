@@ -19,6 +19,11 @@ export default {
       this.scene = 'register'
     }, 1000)
   },
+  methods: {
+    changeScene(scene) {
+      this.scene = scene
+    }
+  },
   watch: {
     scene: function (newScene, oldScene) {
       this.$emit('sceneChanged', newScene)
