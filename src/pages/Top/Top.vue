@@ -16,6 +16,7 @@
                  @keyup.enter="search()"
                  @input="search()"
           >
+
         </div>
       </div>
     </div>
@@ -471,7 +472,7 @@ export default {
       axios.post(this.$root.routes.login, {
         grant_type: 'password',
         client_id: 2,
-        client_secret: 'Q4GFeuMn7yLDGJRxg1ScbKjFkkYk1woAyCrxAqEt',
+        client_secret: '7PYtyADSsYh5yR5Dc0r8GMSzmTMwv4qY36q7X5QO',
         username: this.username,
         password: this.password,
         scope: '',

@@ -4,7 +4,6 @@
     <version />
   </div>
 </template>
-
 <script>
 import Version from "../../components/Version/Version";
 export default {
